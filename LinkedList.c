@@ -125,7 +125,6 @@ int main() {
     }
 
     listPrint(list1);
-    printf("%d\n", list1->size);
     printf("%d\n", listPopFront(list1));
     listPrint(list1);
 

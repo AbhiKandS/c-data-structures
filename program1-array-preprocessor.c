@@ -54,7 +54,7 @@ int main() {
     //user input
     int a[5];
     for (int i = 0; i < 5; i++) {
-      printf("Enter element at index %d: ", i);
+      printf("Enter element at index %d", i);
       scanf("%d", &a[i]);
     }
 
