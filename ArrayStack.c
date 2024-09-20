@@ -19,11 +19,11 @@ bool isEmpty() {
 
 bool isFull() { return TOS == MAX-1;}
 
-void push(int data) {
+void push() {
     if (isFull()) printf("Stock Overflow\n");
     else {
-        stack[TOS+1] = data;
-        TOS++;
+        int data = get_int("Enter element to push: ");
+        stack[++TOS] = data;
         printf("Pushed %d to stack\n", data);
     }
 }
@@ -31,8 +31,7 @@ void push(int data) {
 void pop() {
     if (isEmpty()) printf("Stack Underflow\n");
     else {
-        TOS--;
-        printf("Poped %d from stack\n", stack[TOS+1]);
+        printf("Poped %d from stack\n", stack[TOS--]);
     }
 }
 
@@ -62,7 +61,7 @@ int main() {
         switch (choice)
         {
         case 1:
-            push(get_int("Enter element to push: \n"));
+            push();
             break;
         
         case 2:
