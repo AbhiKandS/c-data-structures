@@ -1,7 +1,9 @@
 #include "src/stack.c"
 #include <string.h>
+#include "src/scan.h"
 
 char* reverse(char** str) {
+    int a = b;
     stack st = Stack.new();
     int len = strlen(*str);
     for (int i = 0; i < len; i++) {

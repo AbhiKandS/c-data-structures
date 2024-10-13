@@ -1,8 +1,9 @@
-#include "src/stack.c"
-#include <stdarg.h>
+#include <stdio.h>
 
 int main() {
-    int c = 1, d = 2, e = 4;
-    c = (d = e);
-    printf("%d\n", c);
+    int f = 5;
+    int r = 2;
+    int n = 6;
+    printf("%d\n", (-3)%6+1);
+    printf("%d\n", (-3)%6);
 }
