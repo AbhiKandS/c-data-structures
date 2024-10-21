@@ -1,7 +1,7 @@
 CC=gcc
 BINS=bin/rev bin/postfix
 OBJS_REV=obj/scan.o obj/stack.o
-OBJS_POSTFIX=obj/stack.o
+OBJS_POSTFIX=obj/stack.o obj/scan.o
 
 all: $(BINS)
 
@@ -15,4 +15,4 @@ bin/postfix: $(OBJS_POSTFIX) InfixPostfix.c
 	$(CC) -o $@ $^
 
 clean:
-	rm -r bin/*dSYM $(OBJ) $(BINS)
+	rm -r bin/*dSYM $(OBJS_REV) $(BINS) $(OBJS_POSTFIX)

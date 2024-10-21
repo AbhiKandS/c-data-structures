@@ -5,6 +5,7 @@
 
 #include "src/stack.h"
 #include "src/hasht.c"
+#include "src/scan.h"
 
 int precedence(char op)
 {
@@ -23,33 +24,69 @@ bool isOperand(char ch) {
     return !(ch == '+' || ch == '-' || ch == '*' || ch == '/' || ch == '%' || ch == '^' || ch == '(' || ch == ')');
 }
 
-char* infix_postfix(char* expression)
+void infix_postfix(char *expression)
 {
     stack stack1 = Stack.new();
     int len = strlen(expression);
-    for (int i = 0; i < len; i++) {
-        char ch = expression[i];
-        if (isOperand(ch)) {
-            printf("%c", ch);
+    char *ch = expression;
+    while (*ch)
+    {
+        if (isOperand(*ch))
+        {
+            printf("%c", *ch);
+            ch++;
             continue;
         }
-        if (stack1.peek(&stack1) == '(' || stack1.count == 0) {
-            stack1.push(&stack1, ch);
+        if (*ch == '(')
+        {
+            stack1.push(&stack1, *ch);
+            ch++;
             continue;
         }
-        if (stack1.peek(&stack1) == ')')
+        if (*ch == ')')
         {
             char x;
-            while ((x = stack1.pop(&stack1)) != '(') {
+            while ((x = stack1.pop(&stack1)) != '(')
+            {
                 printf("%c", x);
             }
+            ch++;
+            continue;
+        }
+        if (stack1.peek(&stack1) == '(' || stack1.count == 0)
+        {
+            stack1.push(&stack1, *ch);
+            ch++;
+            continue;
+        }
+
+        int tos = precedence(stack1.peek(&stack1));
+        int curr = precedence(*ch);
+
+        if (tos < curr)
+        {
+            stack1.push(&stack1, *ch);
+            ch++;
+            continue;
+        }
+
+        if (tos > curr || (tos == curr && lrAssociative(*ch)))
+        {
+            printf("%c", stack1.pop(&stack1));
+            continue;
+        }
+        else
+        {
+            stack1.push(&stack1, *ch);
+            ch++;
+            continue;
         }
     }
-    printf("\n");
     printf("%s\n", stack1.string(&stack1));
-    return expression;
 }
 
-int main() {
-    infix_postfix("a+b(b-)");
+int main()
+{
+    char* expression = "a+b*(c-d)/(e*f+g)*h^i^j";
+    infix_postfix(expression);
 }
