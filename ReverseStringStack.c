@@ -1,16 +1,16 @@
-#include "src/stack.c"
+#include "src/stack.h"
 #include <string.h>
 #include "src/scan.h"
 
 char* reverse(char** str) {
-    int a = b;
     stack st = Stack.new();
     int len = strlen(*str);
     for (int i = 0; i < len; i++) {
         st.push(&st, (*str)[i]);
     }
-    *str = st.string(&st);
-    return st.string(&st);
+    for (int i = 0; ((*str)[i] = st.pop(&st)); i++)
+
+    return (*str);
 }
 
 int main() {

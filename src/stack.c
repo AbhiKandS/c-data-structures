@@ -1,12 +1,6 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdbool.h>
-#include <limits.h>
-#include <stdarg.h>
-#include <string.h>
+#include "stack.h" 
 
-static struct node
-{
+static struct node {
     char data;
     struct node *next;
 } node;
@@ -19,16 +13,6 @@ static struct node *node_new(char data)
     return new;
 }
 
-typedef struct stack {
-    struct node* tos;
-    int count;
-    struct stack (*new)(void);
-    bool (*pop)(struct stack*);
-    bool (*push)(struct stack*, char);
-    char (*peek)(struct stack*);
-    char* (*string)(struct stack*);
-    void (*clear)(struct stack*);
-} stack;
 
     static bool stack_push(struct stack* st, char data) {
         struct node *new = node_new(data);
@@ -43,13 +27,14 @@ typedef struct stack {
         st->count++;
         return 1;
     }
-    static bool stack_pop(stack* st) {
-        if (!st->tos) return 0;
+    static char stack_pop(stack* st) {
+        if (!st->tos) return '\0';
         struct node* temp = st->tos;
         st->tos = st->tos->next;
+        char data = temp->data;
         free(temp);
         st->count--;
-        return 1;
+        return data;
     }
     static char* stack_string(stack* st) {
         char* buffer = (char*)malloc((st->count+1) * sizeof(char));
