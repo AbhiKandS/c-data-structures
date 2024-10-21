@@ -6,16 +6,17 @@
 #include "src/stack.h"
 #include "src/hasht.c"
 
-//bool isOperator(char ch)
-
-int isHigherPrecidence(hasht* hasht, char* op1, char* op2) {
-    int one = atoi(hasht->lookup(hasht, op1));
-    int two = atoi(hasht->lookup(hasht, op2));
-    return one > two;
+int precedence(char op)
+{
+    if (op == '(' || op == ')') return 4;
+    if (op == '^') return 3;
+    if (op == '*' || op == '/' || op == '%') return 2;
+    if (op == '+' || op == '-') return 1;
+    return 0;
 }
 
 bool lrAssociative(char op) {
-    return (op == '^');
+    return !(op == '^');
 }
 
 bool isOperand(char ch) {
@@ -36,24 +37,19 @@ char* infix_postfix(char* expression)
             stack1.push(&stack1, ch);
             continue;
         }
-        if (isHigherPrecidence(o, &ch, &(stack1.peek(stack1)))) {
-            stack1.push(&stack1, ch);
+        if (stack1.peek(&stack1) == ')')
+        {
+            char x;
+            while ((x = stack1.pop(&stack1)) != '(') {
+                printf("%c", x);
+            }
         }
     }
+    printf("\n");
+    printf("%s\n", stack1.string(&stack1));
     return expression;
 }
 
 int main() {
-    hasht operators = HashTable.new(90);
-    hasht* o = &operators;
-    operators.insert(o, "(", "4");
-    operators.insert(o, ")", "4");
-    operators.insert(o, "^", "3");
-    operators.insert(o, "*", "2");
-    operators.insert(o, "/", "2");
-    operators.insert(o, "%", "2");
-    operators.insert(o, "+", "1");
-    operators.insert(o, "-", "1");
-
-    infix_postfix("wh+t and-*");
+    infix_postfix("a+b(b-)");
 }

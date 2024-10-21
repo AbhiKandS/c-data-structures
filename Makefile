@@ -1,11 +1,11 @@
 CC=gcc
 BINS=bin/rev bin/postfix
-OBJS_REV=src/scan.o src/stack.o
-OBJS_POSTFIX=src/stack.o
+OBJS_REV=obj/scan.o obj/stack.o
+OBJS_POSTFIX=obj/stack.o
 
 all: $(BINS)
 
-%.o: %.c
+obj/%.o: src/%.c
 	$(CC) -o $@ -c $<
 
 bin/rev: $(OBJS_REV) ReverseStringStack.c
