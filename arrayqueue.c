@@ -1,9 +1,3 @@
-/**
- * 6. write a program to reverse a sentence/string using stack.
- * 7. write a program to check for balanced parenthesis in a given expression.
- *  8. write a program to convert infix expression to prefix and postfix expression.
- *  9. write a program to implement linear queue using array and linkedlist.
- */
 #include <stdio.h>
 #include <stdbool.h>
 

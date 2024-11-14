@@ -1,4 +1,5 @@
 #include "src/stack.c"
+#include "src/scan.c"
 #include <stdbool.h>
 #include <stdarg.h>
 
@@ -16,7 +17,7 @@ bool isBalanced(char* str)
         new.pop(&new);
     } 
    }
-   return !new.peek(&new);
+   return 1;
 }
 
 int main()

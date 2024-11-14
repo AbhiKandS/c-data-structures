@@ -4,7 +4,6 @@
 #include <stdbool.h>
 
 #include "src/stack.h"
-#include "src/hasht.c"
 #include "src/scan.h"
 
 int precedence(char op)
