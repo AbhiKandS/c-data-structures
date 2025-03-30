@@ -30,7 +30,7 @@ int main()
     int num;
     printf("Enter the number to search: ");
     scanf("%d", &num);
-    int search_Idx = binary_search(arr, 0, len - 1, num);
+    int search_Idx = binary_search(a, 0, size - 1, num);
     if (search_Idx == -1)
         printf("number not found!\n");
     else

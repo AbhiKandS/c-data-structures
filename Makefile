@@ -1,7 +1,8 @@
 CC=gcc
-BINS=bin/rev bin/postfix
+BINS=bin/rev bin/postfix bin/prefix
 OBJS_REV=obj/scan.o obj/stack.o
-OBJS_POSTFIX=obj/stack.o obj/scan.o
+OBJS_POSTFIX=obj/stack.o
+OBJS_PREFIX=obj/stack.o
 
 all: $(BINS)
 
@@ -12,6 +13,9 @@ bin/rev: $(OBJS_REV) ReverseStringStack.c
 	$(CC) -o $@ $^
 
 bin/postfix: $(OBJS_POSTFIX) InfixPostfix.c
+	$(CC) -o $@ $^
+
+bin/prefix: $(OBJS_PREFIX) InfixPrefix.c
 	$(CC) -o $@ $^
 
 clean:
